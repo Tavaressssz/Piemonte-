@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> WEB III </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css"/>
+        <link rel="icon" href="img/logoPiemonte3.png"/>
+   
+        <style>
+            body{
+                background-image: url('img/fundop.jpg')
+            }
+            
+            h1{
+                color: wheat;
+            }
+        </style>
+    
+    </head>
+    <body>
+
+        <main class="container-fluid col-md-6 col-sm-10 mt-5 text-center">
+            <img src="img/logoPiemonte3.png" alt="Logotipo do site" width="300"/>
+            <h1 class="mb-4">Login</h1>
+
+            <form action="#" method="post" class="validar" novalidate >
+
+                <div class="form-floating mb-3 mt-3">
+                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required >
+                    <label for="email">Email</label>
+                    
+                    <small class="invalid-feedback text-start">
+                        Insira o email registrado.
+                    </small>
+                </div>
+                
+                <div class="form-floating">
+                    <input type="password" class="form-control" id="senha" placeholder="Senha" required minlength="6" >
+                    <label for="senha">Password</label>
+                    
+                    <small class="invalid-feedback text-start">
+                        Insira a senha registrada.
+                    </small>
+                </div>
+
+                <div class="d-grid">
+                    <input type="submit" value="Entrar" class="btn btn-primary mt-4 mb-3">
+                    <a href="registro.html" class="btn btn-link"> Cadastre-se. </a>
+                </div>
+
+            </form>
+        
+        </main>
+
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/init-validation.js"></script>
+        
+    </body>
+</html>
