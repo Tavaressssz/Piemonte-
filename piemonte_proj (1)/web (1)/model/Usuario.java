@@ -4,16 +4,17 @@ import database.UsuarioDAO;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
 public class Usuario {
+
     private int id;
     private String nome;
     private String email;
     private String nascimento;
     private String senha;
     private boolean noticias;
-    
-    public Usuario(){}
+
+    public Usuario() {
+    }
 
     public Usuario(String email, String senha) {
         this.email = email;
@@ -21,6 +22,7 @@ public class Usuario {
     }
 
     public Usuario(String nome, String email, String nascimento, String senha, boolean noticias) {
+
         this.nome = nome;
         this.email = email;
         this.nascimento = nascimento;
@@ -28,8 +30,20 @@ public class Usuario {
         this.noticias = noticias;
     }
 
+    public Usuario(int id, String nome, String email, String nascimento, boolean noticias) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.nascimento = nascimento;
+        this.noticias = noticias;
+    }
+
+    
+    
+    
     public int getId() {
-        return id;
+        return this.id;
+
     }
 
     public void setId(int id) {
@@ -76,25 +90,25 @@ public class Usuario {
         this.noticias = noticias;
     }
 
-    public boolean login() throws SQLException, ClassNotFoundException {
+    public boolean login() throws ClassNotFoundException, SQLException {
         boolean key = false;
-        
-        UsuarioDAO dao = new UsuarioDAO();
-        ArrayList<Usuario> list = dao.getAllUsers();
-        
-        for(Usuario u : list) {
-            if(u.getEmail().equals(this.email)) {
-                if(u.getSenha().equals(this.senha)) {
+
+        UsuarioDAO uDao = new UsuarioDAO();
+        ArrayList<Usuario> list = uDao.getAllUsers();
+
+        for (Usuario u : list) {
+            if (u.getEmail().equals(this.email)) {
+                if (u.getSenha().equals(this.senha)) {
                     key = true;
                 }
             }
         }
-        return key;
+         return key;
     }
-    
+
     @Override
     public String toString() {
         return "Usuario{" + "id=" + id + ", nome=" + nome + ", email=" + email + ", nascimento=" + nascimento + ", senha=" + senha + ", noticias=" + noticias + '}';
     }
-    
+
 }
