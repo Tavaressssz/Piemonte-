@@ -1,3 +1,5 @@
 <%
-    HttpSession autenticado = (HttpSession) request.getSession().getAttribute("autenticado");
+    if( request.getSession().getAttribute("autenticado") == null ) {
+        response.sendRedirect("index.html");
+    }
 %>
