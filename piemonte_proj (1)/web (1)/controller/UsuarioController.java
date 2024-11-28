@@ -4,6 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import java.sql.SQLException;
 import database.UsuarioDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +18,8 @@ public class UsuarioController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
+        
         String pagina = request.getParameter("pagina");
 
         if (pagina.equals("login")) {
@@ -31,8 +33,7 @@ public class UsuarioController extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("autenticado", true);
                     
-                    request.getRequestDispatcher("inicio.jsp")
-                            .forward(request, response);
+                    response.sendRedirect("inicio.jsp");
                 } else {
                     response.sendRedirect("index.html");
                 }
@@ -55,6 +56,53 @@ public class UsuarioController extends HttpServlet {
                 uDao.setNewUser(u);
 
                 response.sendRedirect("index.html");
+            } catch (SQLException | ClassNotFoundException erro) {
+                System.err.println(erro);
+            }
+        }
+        
+        
+        if(pagina.equals("excluir")) {
+            int id = Integer.parseInt( request.getParameter("id") );
+            
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                dao.deleteUser(id);
+                response.sendRedirect("inicio.jsp");
+            } catch(ClassNotFoundException | SQLException erro) {
+                System.err.println( erro );
+            }
+        }
+        
+        
+        if(pagina.equals("editar")) {
+            int id = Integer.parseInt( request.getParameter("id") );
+            
+            try {
+                UsuarioDAO dao = new UsuarioDAO();
+                Usuario u = dao.getOneUser(id);
+                request.setAttribute("user", u);
+                request.getRequestDispatcher("editar.jsp").forward(request, response);
+            } catch(ClassNotFoundException | SQLException erro) {
+                System.err.println( erro );
+            }
+        }
+        
+        
+        if (pagina.equals("atualizar")) {
+            int id = Integer.parseInt( request.getParameter("id") );
+            String nome = request.getParameter("nome");
+            String email = request.getParameter("email");
+            String nascimento = request.getParameter("nasc");
+            boolean noticias = request.getParameter("noticias") != null;
+
+            Usuario u = new Usuario(id, nome, email, nascimento, noticias);
+
+            try {
+                UsuarioDAO uDao = new UsuarioDAO();
+                uDao.updateUser(u);
+
+                response.sendRedirect("inicio.jsp");
             } catch (SQLException | ClassNotFoundException erro) {
                 System.err.println(erro);
             }
