@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> WEB III </title>
+        <title> Login </title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="css/bootstrap.min.css"/>
@@ -24,10 +24,12 @@
             <img src="img/logoPiemonte3.png" alt="Logotipo do site" width="300"/>
             <h1 class="mb-4">Login</h1>
 
-            <form action="#" method="post" class="validar" novalidate >
+            <form action="usuario-controller" method="post" class="validar" novalidate >
 
+                <input type="hidden" name="pagina" value="login">
+                
                 <div class="form-floating mb-3 mt-3">
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com" required >
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required >
                     <label for="email">Email</label>
                     
                     <small class="invalid-feedback text-start">
@@ -36,7 +38,7 @@
                 </div>
                 
                 <div class="form-floating">
-                    <input type="password" class="form-control" id="senha" placeholder="Senha" required minlength="6" >
+                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required minlength="6" >
                     <label for="senha">Password</label>
                     
                     <small class="invalid-feedback text-start">
@@ -45,8 +47,8 @@
                 </div>
 
                 <div class="d-grid">
-                    <input type="submit" value="Entrar" class="btn btn-primary mt-4 mb-3">
-                    <a href="registro.html" class="btn btn-link"> Cadastre-se. </a>
+                    <input type="submit" value="Entrar" class="btn btn-success mt-4 mb-3">
+                    <a href="registro.html" class="btn btn-light"> Cadastre-se. </a>
                 </div>
 
             </form>
