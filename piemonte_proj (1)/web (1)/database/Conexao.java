@@ -1,13 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package database;
 
-/**
- *
- * @author 182400571
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Conexao {
     
+    public static Connection getConn() throws ClassNotFoundException, SQLException {
+        
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        
+        Connection conn;
+        
+        conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3307/sistema_pie" ,
+                "root" ,
+                "root"
+        );
+        
+        System.out.println("Dados da conexão:" + conn.getCatalog());
+        
+        return conn;
+    } 
 }
